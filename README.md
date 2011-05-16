@@ -3,7 +3,7 @@
 	git clone git://github.com/20main/osmake.git
 	cd osmake
 
-## usage:
+## Usage:
 
 ### At first
 
@@ -28,7 +28,7 @@ For example:
 	make build
 	sudo make install dir=/home/opensim/sim1 user=opensim group=staff
 
-### other actions available
+### Other actions available
 
 Clean the source tree
 
