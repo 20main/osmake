@@ -16,7 +16,8 @@ prebuild: init
 	@cd sources; ./runprebuild.sh
 
 clean:
-	@cd sources; ${NANT} clean
+	@cd sources; \
+	if test -f "*.build"; then ${NANT} clean; fi
 
 install: test-param-dir
 	@if ! test -d "$(dirpath)"; then mkdir -p $(dirpath); fi
