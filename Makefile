@@ -1,12 +1,12 @@
-repo	?= git://github.com/francogrid/sim.git
-dir		?= 
-user	?= $(shell id -nu)
-group	?= $(user)
+repo ?= git://github.com/francogrid/sim.git
+dir ?= 
+user ?= $(shell id -nu)
+group ?= $(user)
 
-dirpath	:= $(shell echo $(dir) | grep -E '^/.*' || echo $(PWD)/$(dir))
-bindir	:= $(dirpath)/bin
-etcdir	:= $(dirpath)/etc
-NANT	= $(strip $(shell which nant 2>/dev/null))
+dirpath := $(shell echo $(dir) | grep -E '^/.*' || echo $(PWD)/$(dir))
+bindir := $(dirpath)/bin
+etcdir := $(dirpath)/etc
+NANT = $(strip $(shell which nant 2>/dev/null))
 
 build: prebuild
 	@cd sources; ${NANT}
@@ -39,11 +39,11 @@ update: init clean
 
 init:
 	@if ! test -d "sources"; then echo "### osmake initialization ###"; \
-        git remote add -f opensim $(repo); \
-        git merge -s ours --no-commit opensim/master; \
-        git read-tree --prefix=sources -u opensim/master; \
-        git commit -m "Merge branch 'master' of $(repo) in sources/ directory."; \
-    fi
+		git remote add -f opensim $(repo); \
+		git merge -s ours --no-commit opensim/master; \
+		git read-tree --prefix=sources -u opensim/master; \
+		git commit -m "Merge branch 'master' of $(repo) in sources/ directory."; \
+	fi
 
 test-param-dir:
 ifeq ($(dir),)
