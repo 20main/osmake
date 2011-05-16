@@ -3,6 +3,10 @@
 	git clone git://github.com/20main/osmake.git
 	cd osmake
 
+## Dependencies
+
+	aptitude install make sudo mono-complete nant
+
 ## Usage:
 
 ### At first
