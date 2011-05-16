@@ -39,6 +39,10 @@ For example:
 	make build
 	sudo make install dir=/home/opensim/sim1 user=opensim group=staff
 
+Sources origin defaults to git://github.com/francogrid/sim.git, you can choose another repo with 'repo' option, i.e.
+
+	make build repo=git://opensimulator.org/git/opensim
+
 ### Other actions available
 
 Clean the source tree
