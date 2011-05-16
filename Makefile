@@ -1,5 +1,5 @@
 repo	?= git://github.com/francogrid/sim.git
-dir		?= opensim
+dir		?= 
 user	?= $(shell id -nu)
 group	?= $(user)
 
@@ -11,8 +11,6 @@ NANT	= $(strip $(shell which nant 2>/dev/null))
 build: prebuild
 	@cd sources; ${NANT}
 	@cd sources; find OpenSim -name \*.mdb -exec cp {} bin \;
-
-all: build install
 
 prebuild:
 	@if ! test -d "sources"; then echo "### osmake initialization ###"; \
@@ -26,10 +24,10 @@ prebuild:
 clean:
 	@cd sources; ${NANT} clean
 
-install:
+install: test-param-dir
 	@if ! test -d "$(dirpath)"; then mkdir -p $(dirpath); fi
 	@if ! test -w "$(dirpath)"; then \
-		echo "ERROR: can't write in $(dirpath), permission denied."; exit 1; \
+		echo "Can't write to $(dirpath), permission denied."; exit 1; \
 	fi
 	@if ! test -d "$(etcdir)"; then mkdir $(etcdir); fi
 	@cd sources; tar cf - bin | tar xf - -C $(dirpath)
@@ -37,7 +35,7 @@ install:
 ifneq ("$(user)", "$(shell id -nu)")
 	@chown -R $(user):$(group) $(dirpath)/*
 endif
-	@echo "####### Installation complete #######"
+	@echo "### INSTALLATION COMPLETE ###"
 	@echo "# installation path: $(dirpath)"
 	@echo "#              user: $(user)"
 	@echo "#             group: $(group)"
@@ -45,5 +43,13 @@ endif
 update: clean
 	@git pull -s subtree opensim master
 
-upgrade: update build install
+test-param-dir:
+ifeq ($(dir),)
+	@echo "You must provide a destination: dir=<path>"
+	@exit 1
+endif
+
+all: update build
+
+upgrade: test-param-dir update build install
 
