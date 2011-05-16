@@ -17,11 +17,18 @@ Then, to install
 
 	make install dir=/path/to/destination
 
-Those 2 actions can be run directly like this
+Multiple install can be done, for example
+
+	make install dir=/home/opensim/sim1
+    make install dir=/home/opensim/sim2
+    make install dir=/home/opensim/sim3
+
+The actions of building and installing can be run in one command
 
 	make build install dir=/path/to/destination
 
-Other options available are 'user' and 'group' to specify the user and group owner of the files, then you will need to use sudo.
+Other options available are 'user' and 'group' to specify the user and group owner of the files, in this case you will need to use sudo.
+If user is provided without group, the group will be the same as user.
 
 For example:
 
