@@ -12,13 +12,7 @@ build: prebuild
 	@cd sources; ${NANT}
 	@cd sources; find OpenSim -name \*.mdb -exec cp {} bin \;
 
-prebuild:
-	@if ! test -d "sources"; then echo "### osmake initialization ###"; \
-		git remote add -f opensim $(repo); \
-		git merge -s ours --no-commit opensim/master; \
-		git read-tree --prefix=sources -u opensim/master; \
-		git commit -m "Merge branch 'master' of $(repo) in sources/ directory."; \
-	fi
+prebuild: init
 	@cd sources; ./runprebuild.sh
 
 clean:
@@ -40,8 +34,16 @@ endif
 	@echo "#              user: $(user)"
 	@echo "#             group: $(group)"
 
-update: clean
+update: init clean
 	@git pull -s subtree opensim master
+
+init:
+	@if ! test -d "sources"; then echo "### osmake initialization ###"; \
+        git remote add -f opensim $(repo); \
+        git merge -s ours --no-commit opensim/master; \
+        git read-tree --prefix=sources -u opensim/master; \
+        git commit -m "Merge branch 'master' of $(repo) in sources/ directory."; \
+    fi
 
 test-param-dir:
 ifeq ($(dir),)
