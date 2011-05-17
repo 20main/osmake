@@ -47,9 +47,9 @@ ifneq ("$(user)", "$(shell id -nu)")
 	@chown -R $(user):$(group) $(dirpath)/*
 endif
 	@echo "### INSTALLATION COMPLETE ###"
-	@echo "# installation path: $(dirpath)"
-	@echo "#              user: $(user)"
-	@echo "#             group: $(group)"
+	@echo "installation path: $(dirpath)"
+	@echo "user: $(user)"
+	@echo "group: $(group)"
 
 test-param-dir:
 ifeq ($(dir),)
