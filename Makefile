@@ -20,7 +20,7 @@ init:
 update: 
 	@if ! test -d "sources"; then make init; \
 	else \
-		make clean; \
+		make clean > /dev/null; \
 		git pull -s subtree opensim master; \
 	fi
 
