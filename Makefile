@@ -33,8 +33,7 @@ build: prebuild
 	@cd sources; find OpenSim -name \*.mdb -exec cp {} bin \;
 
 clean:
-	@cd sources; \
-	if test -f "*.build"; then ${NANT} clean; fi
+	@cd sources; ${NANT} clean;
 
 install: test-param-dir
 	@if ! test -d "$(dirpath)"; then mkdir -p $(dirpath); fi
