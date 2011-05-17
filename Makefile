@@ -58,5 +58,3 @@ ifeq ($(dir),)
 	@exit 1
 endif
 
-upgrade: update build
-
