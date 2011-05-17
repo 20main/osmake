@@ -8,12 +8,29 @@ bindir := $(dirpath)/bin
 etcdir := $(dirpath)/etc
 NANT = $(strip $(shell which nant 2>/dev/null))
 
+all: update build
+
+init:
+	@echo "### osmake initialization ###"
+	@git remote add -f opensim $(repo)
+	@git merge -s ours --no-commit opensim/master
+	@git read-tree --prefix=sources -u opensim/master
+	@git commit -m "Merge branch 'master' of $(repo) in sources/ directory."
+
+update: 
+	@if ! test -d "sources"; then make init; \
+	else
+		make clean; \
+		git pull -s subtree opensim master; \
+	fi
+
+prebuild:
+	@if ! test -d "sources"; then make init; fi
+	@cd sources; ./runprebuild.sh
+
 build: prebuild
 	@cd sources; ${NANT}
 	@cd sources; find OpenSim -name \*.mdb -exec cp {} bin \;
-
-prebuild: init
-	@cd sources; ./runprebuild.sh
 
 clean:
 	@cd sources; \
@@ -35,24 +52,11 @@ endif
 	@echo "#              user: $(user)"
 	@echo "#             group: $(group)"
 
-update: init clean
-	@git pull -s subtree opensim master
-
-init:
-	@if ! test -d "sources"; then echo "### osmake initialization ###"; \
-		git remote add -f opensim $(repo); \
-		git merge -s ours --no-commit opensim/master; \
-		git read-tree --prefix=sources -u opensim/master; \
-		git commit -m "Merge branch 'master' of $(repo) in sources/ directory."; \
-	fi
-
 test-param-dir:
 ifeq ($(dir),)
 	@echo "You must provide a destination: dir=<path>"
 	@exit 1
 endif
 
-all: update build
-
-upgrade: test-param-dir update build install
+upgrade: update build
 
