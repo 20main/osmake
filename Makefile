@@ -30,7 +30,6 @@ prebuild:
 
 build: prebuild
 	@cd sources; ${NANT}
-	@cd sources; find OpenSim -name \*.mdb -exec cp {} bin \;
 
 clean:
 	@cd sources; ${NANT} clean;
