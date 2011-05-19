@@ -1,0 +1,14 @@
+#!/bin/bash
+
+pwd=$(dirname $0)
+
+osbin=${pwd}/bin
+osetc=${etc}/etc
+oscmd="mono OpenSim.exe"
+
+cd $osbin
+if [ -r "${osetc}/OpenSim.ini" ]; then
+	oscmd="${oscmd} -inifile ${osetc}/OpenSim.ini"
+fi
+env LANG=C $oscmd
+
