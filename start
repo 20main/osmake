@@ -3,7 +3,7 @@
 pwd=$(dirname $0)
 
 osbin=${pwd}/bin
-osetc=${etc}/etc
+osetc=${pwd}/etc
 oscmd="mono OpenSim.exe"
 
 cd $osbin
