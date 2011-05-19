@@ -8,7 +8,7 @@ oscmd="mono OpenSim.exe"
 
 cd $osbin
 if [ -r "${osetc}/OpenSim.ini" ]; then
-	oscmd="${oscmd} -inifile ${osetc}/OpenSim.ini"
+	oscmd="${oscmd} -inifile=${osetc}/OpenSim.ini"
 fi
 env LANG=C $oscmd
 
