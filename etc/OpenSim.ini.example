@@ -10,7 +10,7 @@
 
     ; Determines where the region XML files are stored if you are loading these from the filesystem.
     ; Defaults to bin/Regions in your OpenSimulator installation directory
-    ; regionload_regionsdir="C:\somewhere\xmlfiles\"
+    regionload_regionsdir="../etc/Regions"
 
     ; Determines the page from which regions xml is retrieved if you are loading these from the web
     ; The XML here has the same format as it does on the filesystem (including the <Root> tag),
