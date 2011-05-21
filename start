@@ -1,7 +1,7 @@
 #!/bin/bash
 
 pwd=$(dirname $0)
-name=$(pwd | sed -e "s#/##" -e "s#/#.#g")
+name=$(echo ${pwd} | sed -e "s#/##" -e "s#/#.#g")
 
 osbin=${pwd}/bin
 osetc=${pwd}/etc
