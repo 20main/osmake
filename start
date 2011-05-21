@@ -1,14 +1,19 @@
 #!/bin/bash
 
 pwd=$(dirname $0)
+name=$(pwd | sed -e "s#/##" -e "s#/#.#g")
 
 osbin=${pwd}/bin
 osetc=${pwd}/etc
-oscmd="mono OpenSim.exe"
+oscmd="env LANG=C mono OpenSim.exe"
 
-cd $osbin
+cd ${osbin}
 if [ -r "${osetc}/OpenSim.ini" ]; then
 	oscmd="${oscmd} -inifile=${osetc}/OpenSim.ini"
 fi
-env LANG=C $oscmd
 
+if [ "$1" = "screen"]; then
+	screen -dmS ${name} ${oscmd}
+else
+	$oscmd
+fi
