@@ -1,5 +1,5 @@
 repo ?= git://github.com/francogrid/sim.git
-dir ?= 
+dir ?=
 user ?= $(shell id -nu)
 group ?= $(user)
 
@@ -17,7 +17,7 @@ init:
 	@git read-tree --prefix=sources -u opensim/master
 	@git commit -m "Merge branch 'master' of $(repo) in sources/ directory."
 
-update: 
+update:
 	@if ! test -d "sources"; then make init; \
 	else \
 		make clean > /dev/null; \
@@ -42,6 +42,7 @@ install: test-param-dir
 	@if ! test -d "$(etcdir)"; then mkdir $(etcdir); fi
 	@cd sources; tar cf - bin | tar xf - -C $(dirpath)
 	@tar cf - etc | tar xf - -C $(dirpath)
+	@cp -a start $(dirpath)/
 ifneq ("$(user)", "$(shell id -nu)")
 	@chown -R $(user):$(group) $(dirpath)/*
 endif
