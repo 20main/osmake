@@ -12,7 +12,7 @@ if [ -r "${osetc}/OpenSim.ini" ]; then
 	oscmd="${oscmd} -inifile=${osetc}/OpenSim.ini"
 fi
 
-if [ "$1" = "screen"]; then
+if [ "$1" = "screen" ]; then
 	screen -dmS ${name} ${oscmd}
 else
 	$oscmd
