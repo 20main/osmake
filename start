@@ -9,7 +9,7 @@ oscmd="env LANG=C mono OpenSim.exe"
 
 cd ${osbin}
 if [ -r "${osetc}/OpenSim.ini" ]; then
-	oscmd="${oscmd} -inifile=${osetc}/OpenSim.ini"
+	oscmd="${oscmd} -inimaster=OpensimDefaults.ini -inifile=${osetc}/OpenSim.ini"
 fi
 
 if [ "$1" = "screen" ]; then
